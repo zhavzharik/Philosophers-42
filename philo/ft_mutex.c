@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   ft_mutex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 00:03:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/06 23:47:56 by abridger         ###   ########.fr       */
+/*   Created: 2021/11/06 23:14:30 by abridger          #+#    #+#             */
+/*   Updated: 2021/11/06 23:24:24 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+int	ft_mutex_init(t_data *data)
 {
-	t_data	data;
-	
-	memset(&data, 0, sizeof(t_data));
-	if (argc != 5 && argc != 6)
-		put_error_message(&data, 1);
-	else
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
 	{
-		action(&data, argv);
-		//put_input(&data, argv);
-		//start_threads(&data);
-		//join_threads(&data);
-		ft_all_clear(&data);
+		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0)
+			return (put_error_message(data, 6));
+		i++;
 	}
-	return (0);
+	if (pthread_mutex_init(&data->whether_hungry, NULL) != 0)
+			return (put_error_message(data, 6));
+	if (pthread_mutex_init(&data->put_message, NULL) != 0)
+			return (put_error_message(data, 6));
+	return (0);	
 }

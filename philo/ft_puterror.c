@@ -6,11 +6,39 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/04 01:52:58 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/06 23:31:58 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	ft_all_clear(t_data *data)
+{
+	int i;
+
+	i = 0;
+	if (data)
+	{
+		if (data->thinker)
+		{
+			free(data->thinker);
+			data->thinker = NULL;
+		}
+		if (data->forks)
+		{
+			while (i < data->nb_philo)
+			{
+				pthread_mutex_destroy(&(data->forks[i]));
+				i++;
+			}
+			free(data->forks);
+			data->forks = NULL;
+		}
+		pthread_mutex_destroy(&data->whether_hungry);
+		pthread_mutex_destroy(&data->put_message);
+	}
+	return (1);
+}
 
 static void	put_err_str(char *str)
 {
@@ -18,7 +46,7 @@ static void	put_err_str(char *str)
 	write(STDERR_FILENO, "\n", 1);
 }
 
-void	put_error_message(int check)
+int	put_error_message(t_data *data, int check)
 {
 	write(STDERR_FILENO, "Error: ", 7);
 	if (check == 1)
@@ -26,10 +54,12 @@ void	put_error_message(int check)
 	else if (check == 2)
 		put_err_str("The wrong argument(s)!");
 	else if (check == 3)
-		put_err_str("Failed to create thread!");
+		put_err_str("Malloc error!");
 	else if (check == 4)
-		put_err_str("Failed to join thread!");
+		put_err_str("Failed to create thread!");
 	else if (check == 5)
+		put_err_str("Failed to join thread!");
+	else if (check == 6)
 		put_err_str("Failed to init mutex!");
-	//break ;
+	return (ft_all_clear(data));
 }
