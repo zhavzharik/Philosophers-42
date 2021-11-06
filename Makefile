@@ -6,7 +6,7 @@
 #    By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 22:52:44 by abridger          #+#    #+#              #
-#    Updated: 2021/11/04 01:48:16 by abridger         ###   ########.fr        #
+#    Updated: 2021/11/06 19:13:41 by abridger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,10 @@ HEADER_BONUS		=	$(SRCS_BONUS_DIR)philosophers_bonus.h
 SRCS			=	$(SRCS_DIR)	philosophers.c		\
 								ft_atoi.c			\
 								ft_puterror.c		\
-								init.c				\
-								ft_strlen.c
+								init_data.c			\
+								ft_strlen.c			\
+								ft_time.c			\
+								ft_threads.c
 									
 
 

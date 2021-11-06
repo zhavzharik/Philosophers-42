@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/04 01:33:25 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/06 20:08:39 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ typedef struct s_philo
 	struct s_data	*data;
 	pthread_t		philo_thread;
 }					t_philo;
-
-
 typedef struct s_data
 {
 	int				nb_philo;
@@ -42,16 +40,20 @@ typedef struct s_data
 	int				nb_times_eat;
 	int				somebody_dead;
 	long long		start_time;
-	pthread_mutex_t	*forks;
+	pthread_mutex_t	forks[300];
 	pthread_mutex_t	whether_hungry;
 	pthread_mutex_t	put_message;
-	t_philo			*thinker;	
+	t_philo			thinker[300];	
 }					t_data;
-
 
 int			ft_atoi(const char *str);
 int			ft_strlen(char *str);
 void		put_error_message(int check);
 void		put_input(t_data *data, char **argv);
+void		init_thinkers(t_data *data);
+long long	get_timestamp(void);
+void		start_threads(t_data *data);
+void		join_threads(t_data *data);
+void		*routine(void *philo);
 
 #endif

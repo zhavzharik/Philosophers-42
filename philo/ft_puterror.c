@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/04 01:32:35 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/04 01:52:58 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	put_error_message(int check)
 	else if (check == 4)
 		put_err_str("Failed to join thread!");
 	else if (check == 5)
-			put_err_str("Failed to init mutex!");
-	//break;
+		put_err_str("Failed to init mutex!");
+	//break ;
 }
