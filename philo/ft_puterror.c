@@ -6,13 +6,13 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/06 23:31:58 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/07 22:16:27 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_all_clear(t_data *data)
+void	ft_all_clear(t_data *data)
 {
 	int i;
 
@@ -34,10 +34,9 @@ int	ft_all_clear(t_data *data)
 			free(data->forks);
 			data->forks = NULL;
 		}
-		pthread_mutex_destroy(&data->whether_hungry);
+		pthread_mutex_destroy(&data->is_hungry);
 		pthread_mutex_destroy(&data->put_message);
 	}
-	return (1);
 }
 
 static void	put_err_str(char *str)
@@ -61,5 +60,6 @@ int	put_error_message(t_data *data, int check)
 		put_err_str("Failed to join thread!");
 	else if (check == 6)
 		put_err_str("Failed to init mutex!");
-	return (ft_all_clear(data));
+	ft_all_clear(data);
+	return (1);
 }

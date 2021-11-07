@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/06 23:11:32 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/07 21:04:20 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ int	init_thinkers(t_data *data)
 	while (--i >= 0)
 	{
 		printf("i %d\n", i);
-		data->thinker[i].pos = i;
-		data->thinker[i].l_fork = i;
-		data->thinker[i].r_fork = (i + 1) % data->nb_philo;
+		data->thinker[i].pos = i + 1;
+		data->thinker[i].l_fork = i + 1;
+		if (i == data->nb_philo - 1)
+			data->thinker[i].r_fork = (i + 2) % data->nb_philo;
+		else
+			data->thinker[i].r_fork = i + 2;
 		data->thinker[i].nb_eat = 0;
 		data->thinker[i].check_time = 0;
 		data->thinker[i].data = data;

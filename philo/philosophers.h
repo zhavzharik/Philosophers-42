@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/06 23:55:02 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/07 23:01:43 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <string.h>
 
 struct s_data;
-
 typedef struct s_philo
 {
 	int				pos;
@@ -42,7 +41,7 @@ typedef struct s_data
 	int				somebody_dead;
 	long long		start_time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	whether_hungry;
+	pthread_mutex_t	is_hungry;
 	pthread_mutex_t	put_message;
 	t_philo			*thinker;	
 }					t_data;
@@ -55,8 +54,9 @@ int			init_thinkers(t_data *data);
 long long	get_timestamp(void);
 void		start_threads(t_data *data);
 void		join_threads(t_data *data);
-void		*routine(void *philo);
-int			ft_all_clear(t_data *data);
+void		*philo_routine(void *philosopher);
+void		philo_eat(t_philo *philo);
+void		ft_all_clear(t_data *data);
 int			ft_mutex_init(t_data *data);
 int			action(t_data *data, char **argv);
 
