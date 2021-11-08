@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:08:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/07 22:39:31 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/08 21:25:33 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,23 @@
 void	*philo_routine(void *philosopher)
 {
 	t_philo	*philo;
-	
+
 	philo = (t_philo *)philosopher;
 	philo->check_time = get_timestamp();
-	if (philo->pos % 2)
-		usleep(15000);
-	while (!philo->data->somebody_dead)
+	if (philo->data->everyone_ate != 1)
 	{
-		philo_eat(philo);
+		if (philo->pos % 2)
+			usleep(15000);
+		while (!philo->data->somebody_dead)
+		{
+			philo_eat(philo);
+			check_everyone_ate(philo);
+			// printf("Everyone_ate = %d\n", philo->data->everyone_ate);
+			if (philo->data->everyone_ate == 1)
+				break ;
+			philo_sleep_think(philo);
+			check_everyone_ate(philo);
+		}
 	}
 	return (NULL);
 }
@@ -30,14 +39,12 @@ void	*philo_routine(void *philosopher)
 void	start_threads(t_data *data)
 {
 	int		i;
-	//t_philo	*philosopher;
 
 	i = 0;
-	while ( i < data->nb_philo)
+	while (i < data->nb_philo)
 	{
-		//philosopher = &(data->thinker[i]);
-		if (pthread_create((&(data->thinker[i]).philo_thread), 
-			NULL, &philo_routine, &(data->thinker[i])) != 0)
+		if (pthread_create((&(data->thinker[i]).philo_thread),
+				NULL, &philo_routine, &(data->thinker[i])) != 0)
 			put_error_message(data, 4);
 		i++;
 	}

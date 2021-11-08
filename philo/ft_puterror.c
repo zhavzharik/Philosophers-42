@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/07 22:16:27 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:50:25 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_all_clear(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (data)

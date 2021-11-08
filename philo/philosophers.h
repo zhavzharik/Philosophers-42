@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/07 23:01:43 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:55:27 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include <sys/time.h>
 # include <string.h>
 
-struct s_data;
+struct				s_data;
+
 typedef struct s_philo
 {
 	int				pos;
@@ -31,6 +32,7 @@ typedef struct s_philo
 	struct s_data	*data;
 	pthread_t		philo_thread;
 }					t_philo;
+
 typedef struct s_data
 {
 	int				nb_philo;
@@ -38,12 +40,13 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_times_eat;
+	int				everyone_ate;
 	int				somebody_dead;
 	long long		start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	is_hungry;
 	pthread_mutex_t	put_message;
-	t_philo			*thinker;	
+	t_philo			*thinker;
 }					t_data;
 
 int			ft_atoi(const char *str);
@@ -56,8 +59,11 @@ void		start_threads(t_data *data);
 void		join_threads(t_data *data);
 void		*philo_routine(void *philosopher);
 void		philo_eat(t_philo *philo);
+void		philo_sleep_think(t_philo *philo);
 void		ft_all_clear(t_data *data);
 int			ft_mutex_init(t_data *data);
 int			action(t_data *data, char **argv);
+void		philo_print(t_philo *philo, int message);
+void		check_everyone_ate(t_philo *philo);
 
 #endif

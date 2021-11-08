@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mutex.c                                         :+:      :+:    :+:   */
+/*   ft_check_philo.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 23:14:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/08 17:50:06 by abridger         ###   ########.fr       */
+/*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
+/*   Updated: 2021/11/08 21:12:16 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_mutex_init(t_data *data)
+void	check_everyone_ate(t_philo *philo)
 {
-	int	i;
+	int		i;
+	t_data	*d;
+	int		check;
 
 	i = 0;
-	while (i < data->nb_philo)
+	d = philo->data;
+	check = 0;
+	if (d->nb_times_eat > 0)
 	{
-		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0)
-			return (put_error_message(data, 6));
-		i++;
+		while (i < d->nb_philo)
+		{
+			if (d->thinker[i].nb_eat >= d->nb_times_eat)
+				check++;
+			// printf("Поел %d vs Надо %d\t I = % d\t Check = %d\n", d->thinker[i].nb_eat, d->nb_times_eat, i, check);
+			if (check == d->nb_philo)
+			{
+				d->everyone_ate = 1;
+				// break ;
+			}
+			i++;
+		}
 	}
-	if (pthread_mutex_init(&data->is_hungry, NULL) != 0)
-		return (put_error_message(data, 6));
-	if (pthread_mutex_init(&data->put_message, NULL) != 0)
-		return (put_error_message(data, 6));
-	return (0);
 }
