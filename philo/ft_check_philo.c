@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/08 21:12:16 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/09 22:18:33 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	check_everyone_ate(t_philo *philo)
 			if (check == d->nb_philo)
 			{
 				d->everyone_ate = 1;
+				// pthread_mutex_lock(&philo->data->put_message);
 				// break ;
 			}
 			i++;

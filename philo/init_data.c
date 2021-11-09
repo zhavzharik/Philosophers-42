@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/08 20:09:03 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/09 20:37:52 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,21 @@ static int	check_input(t_data *data)
 		return (put_error_message(data, 2));
 	}
 	return (0);
+}
+
+void	init_occupied_forks(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->occupied_forks = (int *)malloc(sizeof(int) * data->nb_philo);
+	if (!data->occupied_forks)
+		put_error_message(data, 3);
+	while (i < data->nb_philo)
+	{
+		data->occupied_forks[i] = 0;
+		i++;
+	}
 }
 
 int	put_input(t_data *data, char **argv)
@@ -62,9 +77,7 @@ int	init_thinkers(t_data *data)
 		data->thinker[i].nb_eat = 0;
 		data->thinker[i].check_time = 0;
 		data->thinker[i].data = data;
-		// printf("Position: %d\n", data->thinker[i].pos);
-		// printf("Left fork: %d\n", data->thinker[i].l_fork);
-		// printf("Right fork: %d\n", data->thinker[i].r_fork);
 	}
+	init_occupied_forks(data);
 	return (0);
 }

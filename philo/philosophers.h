@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/08 20:55:27 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/09 20:51:04 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_data
 	int				everyone_ate;
 	int				somebody_dead;
 	long long		start_time;
+	int				*occupied_forks;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	is_hungry;
 	pthread_mutex_t	put_message;
@@ -65,5 +66,9 @@ int			ft_mutex_init(t_data *data);
 int			action(t_data *data, char **argv);
 void		philo_print(t_philo *philo, int message);
 void		check_everyone_ate(t_philo *philo);
+long long	get_time(t_philo *philo);
+void		init_occupied_forks(t_data *data);
+void		ft_ptr_clear(t_data *data);
+int			available_forks(t_philo *philo);
 
 #endif
