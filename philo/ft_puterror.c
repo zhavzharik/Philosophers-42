@@ -6,25 +6,11 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/09 20:43:06 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/10 19:51:33 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void	ft_ptr_clear(t_data *data)
-{
-	if (data->thinker)
-	{
-		free(data->thinker);
-		data->thinker = NULL;
-	}
-	if (data->occupied_forks)
-	{
-		free(data->occupied_forks);
-		data->occupied_forks = NULL;
-	}
-}
 
 void	ft_all_clear(t_data *data)
 {
@@ -33,7 +19,11 @@ void	ft_all_clear(t_data *data)
 	i = 0;
 	if (data)
 	{
-		ft_ptr_clear(data);
+		if (data->thinker)
+		{
+			free(data->thinker);
+			data->thinker = NULL;
+		}
 		if (data->forks)
 		{
 			while (i < data->nb_philo)

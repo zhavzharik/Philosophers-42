@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/09 20:51:04 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/10 23:12:39 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,21 @@
 # include <sys/time.h>
 # include <string.h>
 
-struct				s_data;
-
 typedef struct s_philo
 {
 	int				pos;
-	int				l_fork;
-	int				r_fork;
+	int				t_to_die;
+	int				t_to_eat;
+	int				t_to_sleep;
+	int				times_eat;
 	int				nb_eat;
 	long long		check_time;
-	struct s_data	*data;
+	long long		start_time;
+	int				must_live;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*hungry;
+	pthread_mutex_t	*message;
 	pthread_t		philo_thread;
 }					t_philo;
 
@@ -43,32 +48,26 @@ typedef struct s_data
 	int				everyone_ate;
 	int				somebody_dead;
 	long long		start_time;
-	int				*occupied_forks;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	is_hungry;
 	pthread_mutex_t	put_message;
 	t_philo			*thinker;
+	pthread_t		monitor;
 }					t_data;
 
 int			ft_atoi(const char *str);
 int			ft_strlen(char *str);
 int			put_error_message(t_data *data, int check);
 int			put_input(t_data *data, char **argv);
-int			init_thinkers(t_data *data);
 long long	get_timestamp(void);
-void		start_threads(t_data *data);
-void		join_threads(t_data *data);
+void		start_philo_threads(t_data *data);
+void		join_philo_threads(t_data *data);
 void		*philo_routine(void *philosopher);
-void		philo_eat(t_philo *philo);
-void		philo_sleep_think(t_philo *philo);
 void		ft_all_clear(t_data *data);
 int			ft_mutex_init(t_data *data);
 int			action(t_data *data, char **argv);
 void		philo_print(t_philo *philo, int message);
-void		check_everyone_ate(t_philo *philo);
-long long	get_time(t_philo *philo);
-void		init_occupied_forks(t_data *data);
-void		ft_ptr_clear(t_data *data);
-int			available_forks(t_philo *philo);
+void		monitor(t_data *data);
+void		*philo_status(void *info);
 
 #endif
