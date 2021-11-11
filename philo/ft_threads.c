@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:08:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/10 23:21:58 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/11 16:02:18 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ void	join_philo_threads(t_data *data)
 	}
 }
 
-void	monitor(t_data *data)
+void	monitor(pthread_t *waiter, t_data *data)
 {
-	if (pthread_create(&(data->monitor), NULL,
+	if (pthread_create(waiter, NULL,
 			&philo_status, (void *)data) != 0)
 		put_error_message(data, 4);
-	// if (pthread_join(data->monitor, NULL) != 0)
-	// 	put_error_message(data, 5);
 }

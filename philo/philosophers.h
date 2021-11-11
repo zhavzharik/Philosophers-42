@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/10 23:12:39 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/11 21:00:57 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ typedef struct s_philo
 	int				nb_eat;
 	long long		check_time;
 	long long		start_time;
-	int				must_live;
+	// int				*must_live;
+	int				hungry;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*hungry;
 	pthread_mutex_t	*message;
 	pthread_t		philo_thread;
 }					t_philo;
@@ -46,14 +46,14 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				nb_times_eat;
 	int				everyone_ate;
-	int				somebody_dead;
+	// int				life;
 	long long		start_time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	is_hungry;
 	pthread_mutex_t	put_message;
 	t_philo			*thinker;
-	pthread_t		monitor;
 }					t_data;
+
+static int		g_life;
 
 int			ft_atoi(const char *str);
 int			ft_strlen(char *str);
@@ -67,7 +67,9 @@ void		ft_all_clear(t_data *data);
 int			ft_mutex_init(t_data *data);
 int			action(t_data *data, char **argv);
 void		philo_print(t_philo *philo, int message);
-void		monitor(t_data *data);
+void		monitor(pthread_t *waiter, t_data *data);
 void		*philo_status(void *info);
+void		program_print(t_data *data, int message);
+void		philo_check_life(t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:59:57 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/10 21:24:50 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/11 20:16:16 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,15 @@ void	philo_print(t_philo *philo, int message)
 	else if (message == 6)
 		printf("%lli %d died\n", get_time(philo), philo->pos);
 	pthread_mutex_unlock(philo->message);
+}
+
+void	program_print(t_data *data, int message)
+{
+	pthread_mutex_lock(&data->put_message);
+	if (message == 7)
+		printf("The philosopher not eat and die!");
+	else if (message == 8)
+		printf("All the philosopher has eaten at least %d times each!",
+			data->nb_times_eat);
+	pthread_mutex_unlock(&data->put_message);
 }

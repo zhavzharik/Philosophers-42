@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/10 23:12:57 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/11 20:50:57 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	check_input(t_data *data)
 {
-	if (data->nb_philo < 0 || data->time_to_die < 0
-		|| data->time_to_eat < 0 || data->time_to_sleep < 0)
+	if (data->nb_philo < 0 || data->time_to_die < 60
+		|| data->time_to_eat < 60 || data->time_to_sleep < 60)
 	{
 		return (put_error_message(data, 2));
 	}
@@ -42,9 +42,10 @@ static int	init_thinkers(t_data *data)
 		data->thinker[i].t_to_sleep = data->time_to_sleep;
 		data->thinker[i].times_eat = data->nb_times_eat;
 		data->thinker[i].nb_eat = 0;
-		data->thinker[i].check_time = 0;
+		data->thinker[i].check_time = get_timestamp();
 		data->thinker[i].start_time = data->start_time;
-		data->thinker[i].must_live = 1;
+		// data->thinker[i].must_live = &(data->life);
+		data->thinker[i].hungry = 1;
 	}
 	return (0);
 }
@@ -60,7 +61,7 @@ int	put_input(t_data *data, char **argv)
 	else
 		data->nb_times_eat = -1;
 	data->everyone_ate = 0;
-	data->somebody_dead = 0;
+	g_life = 1;
 	if (check_input(data))
 		return (1);
 	else

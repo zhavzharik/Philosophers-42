@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/10 19:51:33 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/11 15:51:32 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_all_clear(t_data *data)
 			free(data->forks);
 			data->forks = NULL;
 		}
-		pthread_mutex_destroy(&data->is_hungry);
 		pthread_mutex_destroy(&data->put_message);
 	}
 }
