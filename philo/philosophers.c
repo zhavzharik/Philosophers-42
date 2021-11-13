@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 00:03:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/11 17:27:50 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/13 22:56:54 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char **argv)
 		monitor(&waiter, &data);
 		pthread_detach(waiter);
 		join_philo_threads(&data);
+		// if (pthread_join(waiter, NULL) != 0)
+		// 	put_error_message(&data, 5);
 		ft_all_clear(&data);
 	}
 	return (0);

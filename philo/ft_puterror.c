@@ -6,11 +6,20 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/11 15:51:32 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/13 23:11:51 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+static void	ft_ptr_clear(t_data *data)
+{
+	if (data->thinker)
+	{
+		free(data->thinker);
+		data->thinker = NULL;
+	}
+}
 
 void	ft_all_clear(t_data *data)
 {
@@ -19,11 +28,7 @@ void	ft_all_clear(t_data *data)
 	i = 0;
 	if (data)
 	{
-		if (data->thinker)
-		{
-			free(data->thinker);
-			data->thinker = NULL;
-		}
+		ft_ptr_clear(data);
 		if (data->forks)
 		{
 			while (i < data->nb_philo)
@@ -59,6 +64,8 @@ int	put_error_message(t_data *data, int check)
 		put_err_str("Failed to join thread!");
 	else if (check == 6)
 		put_err_str("Failed to init mutex!");
+	else if (check == 7)
+		put_err_str("The philosopher not eat and die!");
 	ft_all_clear(data);
 	return (1);
 }

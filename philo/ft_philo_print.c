@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:59:57 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/11 20:16:16 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/13 23:32:23 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ void	philo_print(t_philo *philo, int message)
 	pthread_mutex_unlock(philo->message);
 }
 
-void	program_print(t_data *data, int message)
+void	*program_print(t_data *data, int message)
 {
 	pthread_mutex_lock(&data->put_message);
 	if (message == 7)
-		printf("The philosopher not eat and die!");
+	{
+		printf("Someone dead. The simulation stops!\n");
+	}
 	else if (message == 8)
-		printf("All the philosopher has eaten at least %d times each!",
+	{
+		printf("All the philosopher has eaten at least %d times each!\n",
 			data->nb_times_eat);
-	pthread_mutex_unlock(&data->put_message);
+		printf("The simulation stops!\n");
+	}
+	return (NULL);
 }
