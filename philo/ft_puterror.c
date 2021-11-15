@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/13 23:11:51 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/15 22:17:19 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,32 @@ void	ft_all_clear(t_data *data)
 	}
 }
 
-static void	put_err_str(char *str)
+static int	put_err_str(char *str)
 {
 	write(STDERR_FILENO, str, ft_strlen(str));
 	write(STDERR_FILENO, "\n", 1);
+	return (1);
 }
 
 int	put_error_message(t_data *data, int check)
 {
 	write(STDERR_FILENO, "Error: ", 7);
 	if (check == 1)
-		put_err_str("The wrong number of arguments!");
+		return (put_err_str("The wrong number of arguments!"));
 	else if (check == 2)
-		put_err_str("The wrong argument(s)!");
+		return (put_err_str("The wrong argument(s)!"));
 	else if (check == 3)
-		put_err_str("Malloc error!");
+		return (put_err_str("Malloc error!"));
 	else if (check == 4)
-		put_err_str("Failed to create thread!");
+		return (put_err_str("Failed to create thread!"));
 	else if (check == 5)
-		put_err_str("Failed to join thread!");
+		return (put_err_str("Failed to join thread!"));
 	else if (check == 6)
-		put_err_str("Failed to init mutex!");
+		return (put_err_str("Failed to init mutex!"));
 	else if (check == 7)
-		put_err_str("The philosopher not eat and die!");
+		return (put_err_str("The philosopher not eat and die!")); // another std?
+	else if (check == 8)
+		return (put_err_str("Failed to detach thread!"));
 	ft_all_clear(data);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/13 23:33:40 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/15 21:47:59 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,39 +47,42 @@ static void	check_everyone_ate(t_data *data)
 	}
 }
 
-static void	check_lives(t_data *data)
+static int	check_lives(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		if (data->thinker[i].life == 0)
+		if (data->thinker[i].life == 0 && data->thinker[i].death_time > 0)
 		{
-			waiters_reset_lives(data);
 			data->end = 1;
+			return (i);
 		}
 		i++;
 	}
+	return (0);
 }
 
 void	*philo_status(void *info)
 {
 	t_data	*data;
+	int		i;
 
 	data = (t_data *)info;
 	while (data->end == 0)
 	{
 		check_everyone_ate(data);
-		check_lives(data);
+		i = check_lives(data);
 		if (data->everyone_ate == 1)
 		{
 			waiters_reset_lives(data);
-			return (program_print(data, 8));
+			return (program_print(data, 6, 1));
 		}
 		else if (data->end == 1)
 		{
-			return (program_print(data, 7));
+			waiters_reset_lives(data);
+			return (program_print(data, 5, i));
 		}
 	}
 	return (NULL);
@@ -87,16 +90,15 @@ void	*philo_status(void *info)
 
 void	check_philo_life(t_philo *philo)
 {
-	long long	check;
+	int	check;
 
 	if (philo->life == 1)
 	{
-		check = get_timestamp() - philo->check_time;
+		check = (int)(get_timestamp() - philo->check_time);
 		if (check > philo->t_to_die)
 		{
 			philo->life = 0;
-			// philo_print(philo, 6);
-			// pthread_mutex_lock(philo->message);
+			philo->death_time = get_timestamp();
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/13 23:32:32 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/15 22:42:19 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_philo
 	int				nb_eat;
 	long long		check_time;
 	long long		start_time;
+	long long		death_time;
 	int				life;
 	int				hungry;
 	pthread_mutex_t	*l_fork;
@@ -59,7 +60,7 @@ int			put_error_message(t_data *data, int check);
 int			put_input(t_data *data, char **argv);
 long long	get_timestamp(void);
 void		start_philo_threads(t_data *data);
-void		join_philo_threads(t_data *data);
+void		detach_philo_threads(t_data *data);
 void		*philo_routine(void *philosopher);
 void		ft_all_clear(t_data *data);
 int			ft_mutex_init(t_data *data);
@@ -67,7 +68,8 @@ int			action(t_data *data, char **argv);
 void		philo_print(t_philo *philo, int message);
 void		monitor(pthread_t *waiter, t_data *data);
 void		*philo_status(void *info);
-void		*program_print(t_data *data, int message);
+void		*program_print(t_data *data, int message, int i);
 void		check_philo_life(t_philo *philo);
+void		check_time(t_philo *philo, int input_time);
 
 #endif

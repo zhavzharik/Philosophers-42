@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/13 21:44:39 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/15 22:40:12 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int	init_thinkers(t_data *data)
 		data->thinker[i].nb_eat = 0;
 		data->thinker[i].check_time = get_timestamp();
 		data->thinker[i].start_time = data->start_time;
+		data->thinker[i].death_time = 0;
 		data->thinker[i].life = 1;
 		data->thinker[i].hungry = 1;
 	}
@@ -66,6 +67,11 @@ int	put_input(t_data *data, char **argv)
 		data->nb_times_eat = -1;
 	data->everyone_ate = 0;
 	data->end = 0;
+	// if (data->nb_philo < 0 || data->time_to_die < 60
+	// 	|| data->time_to_eat < 60 || data->time_to_sleep < 60)
+	// {
+	// 	return (put_error_message(data, 2));
+	// }
 	if (check_input(data))
 		return (1);
 	else

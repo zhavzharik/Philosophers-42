@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:08:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/11 16:02:18 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/15 22:42:00 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	start_philo_threads(t_data *data)
 	}
 }
 
-void	join_philo_threads(t_data *data)
+void	detach_philo_threads(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		if (pthread_join(data->thinker[i].philo_thread, NULL) != 0)
-			put_error_message(data, 5);
+		if (pthread_detach(data->thinker[i].philo_thread) != 0)
+			put_error_message(data, 8);
 		i++;
 	}
 }
