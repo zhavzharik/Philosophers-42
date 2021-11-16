@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/15 22:42:19 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/16 22:20:10 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ typedef struct s_philo
 	int				t_to_die;
 	int				t_to_eat;
 	int				t_to_sleep;
-	int				times_eat;
+	int				times_eat; //
 	int				nb_eat;
 	long long		check_time;
 	long long		start_time;
 	long long		death_time;
 	int				life;
 	int				hungry;
+	int				last;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*message;
@@ -69,7 +70,7 @@ void		philo_print(t_philo *philo, int message);
 void		monitor(pthread_t *waiter, t_data *data);
 void		*philo_status(void *info);
 void		*program_print(t_data *data, int message, int i);
-void		check_philo_life(t_philo *philo);
-void		check_time(t_philo *philo, int input_time);
+// void		check_philo_life(t_philo *philo);
+void		check_time(t_philo *philo, int flag);
 
 #endif

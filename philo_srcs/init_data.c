@@ -6,27 +6,13 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/15 22:40:12 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/16 19:57:15 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	check_input(t_data *data)
-{
-	if (data->nb_philo < 0 || data->time_to_die < 60
-		|| data->time_to_eat < 60 || data->time_to_sleep < 60)
-	{
-		return (put_error_message(data, 2));
-	}
-	if (data->nb_philo == 1)
-	{
-		return (put_error_message(data, 7));
-	}
-	return (0);
-}
-
-static int	init_thinkers(t_data *data)
+static int	ft_malloc_philo(t_data *data)
 {
 	int		i;
 
@@ -37,6 +23,23 @@ static int	init_thinkers(t_data *data)
 	data->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * i);
 	if (!data->forks)
 		return (put_error_message(data, 3));
+	return (0);
+}
+
+static void	last_philo(t_data *data, int i)
+{
+	if (data->nb_philo % 2 == 1 && i == data->nb_philo - 1)
+		data->thinker[i].last = 1;
+	else
+		data->thinker[i].last = 0;
+}
+
+static int	init_thinkers(t_data *data)
+{
+	int		i;
+
+	i = data->nb_philo;
+	ft_malloc_philo(data);
 	data->start_time = get_timestamp();
 	while (--i >= 0)
 	{
@@ -46,11 +49,12 @@ static int	init_thinkers(t_data *data)
 		data->thinker[i].t_to_sleep = data->time_to_sleep;
 		data->thinker[i].times_eat = data->nb_times_eat;
 		data->thinker[i].nb_eat = 0;
-		data->thinker[i].check_time = get_timestamp();
+		data->thinker[i].check_time = data->start_time; //get_timestamp();
 		data->thinker[i].start_time = data->start_time;
 		data->thinker[i].death_time = 0;
 		data->thinker[i].life = 1;
 		data->thinker[i].hungry = 1;
+		last_philo(data, i);
 	}
 	return (0);
 }
@@ -67,13 +71,5 @@ int	put_input(t_data *data, char **argv)
 		data->nb_times_eat = -1;
 	data->everyone_ate = 0;
 	data->end = 0;
-	// if (data->nb_philo < 0 || data->time_to_die < 60
-	// 	|| data->time_to_eat < 60 || data->time_to_sleep < 60)
-	// {
-	// 	return (put_error_message(data, 2));
-	// }
-	if (check_input(data))
-		return (1);
-	else
-		return (init_thinkers(data));
+	return (init_thinkers(data));
 }

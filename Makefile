@@ -6,19 +6,19 @@
 #    By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 22:52:44 by abridger          #+#    #+#              #
-#    Updated: 2021/11/08 20:49:05 by abridger         ###   ########.fr        #
+#    Updated: 2021/11/16 18:54:41 by abridger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				=	philo.a
+NAME				=	philo
 
-NAME_B				=	philo_bonus.a
+NAME_B				=	philo_bonus
 
-SRCS_DIR			=	./philo/
+SRCS_DIR			=	./philo_srcs/
 
 OBJS_DIR			=	./objs/
 
-SRCS_BONUS_DIR		=	./philo_bonus/
+SRCS_BONUS_DIR		=	./philo_bonus_srcs/
 
 OBJS_BONUS_DIR		=	./objs_bonus/
 

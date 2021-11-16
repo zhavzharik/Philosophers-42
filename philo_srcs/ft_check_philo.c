@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/15 21:47:59 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/16 22:36:22 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,14 @@ static void	check_everyone_ate(t_data *data)
 	{
 		while (i < data->nb_philo)
 		{
-			if (data->thinker[i].hungry == 0)
+			if (data->thinker[i].nb_eat == data->nb_times_eat
+				&& data->nb_times_eat > 0)
+			{
+				data->thinker[i].hungry = 0;
 				check++;
+			}
+			// if (data->thinker[i].hungry == 0)
+			// 	check++;
 			if (check == data->nb_philo)
 			{
 				data->everyone_ate = 1;
@@ -47,15 +53,36 @@ static void	check_everyone_ate(t_data *data)
 	}
 }
 
+// static int	check_lives(t_data *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < data->nb_philo)
+// 	{
+// 		if (data->thinker[i].life == 0 && data->thinker[i].death_time > 0)
+// 		{
+// 			data->end = 1;
+// 			return (i);
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
 static int	check_lives(t_data *data)
 {
 	int	i;
+	int	check;
 
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		if (data->thinker[i].life == 0 && data->thinker[i].death_time > 0)
+		check = (int)(get_timestamp() - data->thinker[i].check_time);
+		if (check > data->time_to_die)
 		{
+			data->thinker[i].life = 0;
+			data->thinker[i].death_time = get_timestamp();
 			data->end = 1;
 			return (i);
 		}
@@ -88,17 +115,17 @@ void	*philo_status(void *info)
 	return (NULL);
 }
 
-void	check_philo_life(t_philo *philo)
-{
-	int	check;
+// void	check_philo_life(t_philo *philo)
+// {
+// 	int	check;
 
-	if (philo->life == 1)
-	{
-		check = (int)(get_timestamp() - philo->check_time);
-		if (check > philo->t_to_die)
-		{
-			philo->life = 0;
-			philo->death_time = get_timestamp();
-		}
-	}
-}
+// 	if (philo->life == 1)
+// 	{
+// 		check = (int)(get_timestamp() - philo->check_time);
+// 		if (check > philo->t_to_die)
+// 		{
+// 			philo->life = 0;
+// 			philo->death_time = get_timestamp();
+// 		}
+// 	}
+// }

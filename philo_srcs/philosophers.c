@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 00:03:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/15 22:44:02 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:59:25 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 int	main(int argc, char **argv)
 {
-	t_data		*data;
+	t_data		data;
 	pthread_t	waiter;
-	int			result;
 
-	// memset(&data, 0, sizeof(t_data));
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	result = 1;
+	memset(&data, 0, sizeof(t_data));
 	if (argc != 5 && argc != 6)
-		return (put_error_message(data, 1));
+		return (put_error_message(&data, 1));
+	else if (ft_atoi(argv[1]) < 1 || ft_atoi(argv[2]) < 60
+		|| ft_atoi(argv[3]) < 60 || ft_atoi(argv[4]) < 60
+		|| (argc == 6 && ft_atoi(argv[5]) < 0))
+		return (put_error_message(&data, 2));
 	else
 	{
-		result = action(data, argv);
-		detach_philo_threads(data);
-		monitor(&waiter, data);
+		action(&data, argv);
+		detach_philo_threads(&data);
+		monitor(&waiter, &data);
 		if (pthread_join(waiter, NULL) != 0)
-			return (put_error_message(data, 5));
-		ft_all_clear(data);
+			return (put_error_message(&data, 5));
+		ft_all_clear(&data);
 	}
-	return (result);
+	return (0);
 }

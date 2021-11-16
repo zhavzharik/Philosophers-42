@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/15 22:17:19 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/16 17:19:11 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int	put_err_str(char *str)
 
 int	put_error_message(t_data *data, int check)
 {
+	(void)data;
 	write(STDERR_FILENO, "Error: ", 7);
 	if (check == 1)
 		return (put_err_str("The wrong number of arguments!"));

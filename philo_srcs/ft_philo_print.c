@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:59:57 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/15 21:55:57 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/16 23:23:32 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,23 @@ static long long	get_time(t_philo *philo, int check)
 	if (check == 1)
 		answer = get_timestamp() - philo->start_time;
 	if (check == 2)
-		answer = philo->death_time - philo->check_time;
+		answer = philo->death_time - philo->start_time;
 	return (answer);
 }
 
 void	philo_print(t_philo *philo, int message)
 {
+	long long	timing;
+
+	timing = philo->check_time - philo->start_time;
 	pthread_mutex_lock(philo->message);
 	if (message == 1)
-		printf("%lli %d has taken a fork\n",
+		printf("%lli %d has taken a left fork\n",
 			get_time(philo, 1), philo->pos);
 	else if (message == 2)
-		printf("%lli %d is eating\n", get_time(philo, 1), philo->pos);
+		printf("%lli %d is eating\n", timing, philo->pos);
 	else if (message == 3)
-		printf("%lli %d is sleeping\n", get_time(philo, 1), philo->pos);
+		printf("%lli %d is sleeping\n", timing + philo->t_to_sleep, philo->pos);
 	else if (message == 4)
 		printf("%lli %d is thinking\n", get_time(philo, 1), philo->pos);
 	pthread_mutex_unlock(philo->message);
