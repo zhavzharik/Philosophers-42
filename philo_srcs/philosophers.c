@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 00:03:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/16 18:59:25 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:44:40 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char **argv)
 		|| ft_atoi(argv[3]) < 60 || ft_atoi(argv[4]) < 60
 		|| (argc == 6 && ft_atoi(argv[5]) < 0))
 		return (put_error_message(&data, 2));
+	else if (ft_atoi(argv[1]) == 1)
+		printf("The philosopher not eat and die!\n");
 	else
 	{
 		action(&data, argv);

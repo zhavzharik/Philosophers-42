@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/16 22:36:22 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/17 21:55:25 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	check_everyone_ate(t_data *data)
 			if (data->thinker[i].nb_eat == data->nb_times_eat
 				&& data->nb_times_eat > 0)
 			{
-				data->thinker[i].hungry = 0;
+				// data->thinker[i].hungry = 0;
 				check++;
 			}
 			// if (data->thinker[i].hungry == 0)
@@ -46,7 +46,7 @@ static void	check_everyone_ate(t_data *data)
 			if (check == data->nb_philo)
 			{
 				data->everyone_ate = 1;
-				waiters_reset_lives(data);
+				// waiters_reset_lives(data);
 			}
 			i++;
 		}
@@ -78,7 +78,7 @@ static int	check_lives(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		check = (int)(get_timestamp() - data->thinker[i].check_time);
+		check = (int)(get_timestamp() - data->thinker[i].check_time); //
 		if (check > data->time_to_die)
 		{
 			data->thinker[i].life = 0;
@@ -97,7 +97,7 @@ void	*philo_status(void *info)
 	int		i;
 
 	data = (t_data *)info;
-	while (data->end == 0)
+	while (1) //data->end == 0)
 	{
 		check_everyone_ate(data);
 		i = check_lives(data);

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:08:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/16 19:43:50 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/17 21:12:37 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,21 @@ void	start_philo_threads(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		// if (i % 2)
-		// 	usleep(13000);
 		if (pthread_create((&(data->thinker[i]).philo_thread),
 				NULL, &philo_routine, &(data->thinker[i])) != 0)
 			put_error_message(data, 4);
-		i++;
+		// usleep(10);
+		i += 2;
+	}
+	usleep(1000);
+	i = 1;
+	while (i < data->nb_philo)
+	{
+		if (pthread_create((&(data->thinker[i]).philo_thread),
+				NULL, &philo_routine, &(data->thinker[i])) != 0)
+			put_error_message(data, 4);
+		// usleep(10);
+		i += 2;
 	}
 }
 
@@ -36,7 +45,7 @@ void	detach_philo_threads(t_data *data)
 	while (i < data->nb_philo)
 	{
 		if (pthread_detach(data->thinker[i].philo_thread) != 0)
-			put_error_message(data, 8);
+			put_error_message(data, 7);
 		i++;
 	}
 }

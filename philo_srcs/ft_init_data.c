@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   ft_init_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/16 19:57:15 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/17 21:37:15 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static int	ft_malloc_philo(t_data *data)
 static void	last_philo(t_data *data, int i)
 {
 	if (data->nb_philo % 2 == 1 && i == data->nb_philo - 1)
-		data->thinker[i].last = 1;
+		data->thinker[i].last_odd = 1;
 	else
-		data->thinker[i].last = 0;
+		data->thinker[i].last_odd = 0;
 }
 
 static int	init_thinkers(t_data *data)
@@ -47,13 +47,13 @@ static int	init_thinkers(t_data *data)
 		data->thinker[i].t_to_die = data->time_to_die;
 		data->thinker[i].t_to_eat = data->time_to_eat;
 		data->thinker[i].t_to_sleep = data->time_to_sleep;
-		data->thinker[i].times_eat = data->nb_times_eat;
+		// data->thinker[i].times_eat = data->nb_times_eat;
 		data->thinker[i].nb_eat = 0;
 		data->thinker[i].check_time = data->start_time; //get_timestamp();
 		data->thinker[i].start_time = data->start_time;
 		data->thinker[i].death_time = 0;
 		data->thinker[i].life = 1;
-		data->thinker[i].hungry = 1;
+		// data->thinker[i].hungry = 1;
 		last_philo(data, i);
 	}
 	return (0);

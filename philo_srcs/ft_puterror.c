@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/16 17:19:11 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:45:31 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int	put_error_message(t_data *data, int check)
 	else if (check == 6)
 		return (put_err_str("Failed to init mutex!"));
 	else if (check == 7)
-		return (put_err_str("The philosopher not eat and die!")); // another std?
-	else if (check == 8)
 		return (put_err_str("Failed to detach thread!"));
 	ft_all_clear(data);
 	return (1);

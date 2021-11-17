@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:59:57 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/16 23:23:32 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:33:20 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ void	philo_print(t_philo *philo, int message)
 	timing = philo->check_time - philo->start_time;
 	pthread_mutex_lock(philo->message);
 	if (message == 1)
-		printf("%lli %d has taken a left fork\n",
+		printf("%lli %d has taken a fork\n",
 			get_time(philo, 1), philo->pos);
 	else if (message == 2)
 		printf("%lli %d is eating\n", timing, philo->pos);
 	else if (message == 3)
-		printf("%lli %d is sleeping\n", timing + philo->t_to_sleep, philo->pos);
+		printf("%lli %d is sleeping\n", timing + philo->t_to_eat, philo->pos);
 	else if (message == 4)
-		printf("%lli %d is thinking\n", get_time(philo, 1), philo->pos);
+		printf("%lli %d is thinking\n",
+			timing + philo->t_to_eat + philo->t_to_sleep, philo->pos);
 	pthread_mutex_unlock(philo->message);
 }
 
