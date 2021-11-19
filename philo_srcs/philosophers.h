@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/17 21:36:48 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:35:14 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_philo
 	// int				times_eat; //
 	int				nb_eat;
 	long long		check_time;
+	long long		prev_time;
 	long long		start_time;
 	long long		death_time;
 	int				life;

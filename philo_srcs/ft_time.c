@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:56:20 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/16 22:09:49 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:45:13 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ void	check_time(t_philo *philo, int flag)
 
 	while (1)
 	{
-		usleep(10);
+		usleep(50);
 		difference = (int)(get_timestamp() - philo->check_time);
 		if (flag == 1 && difference >= philo->t_to_eat)
 			break ;
 		else if (flag == 2 && difference >= philo->t_to_eat + philo->t_to_sleep)
 			break ;
+		// usleep(10);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/17 21:55:25 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:35:21 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ static int	check_lives(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		check = (int)(get_timestamp() - data->thinker[i].check_time); //
+		check = (int)(data->thinker[i].check_time - data->thinker[i].prev_time);
 		if (check > data->time_to_die)
 		{
 			data->thinker[i].life = 0;
-			data->thinker[i].death_time = get_timestamp();
+			data->thinker[i].death_time = data->thinker[i].check_time;
 			data->end = 1;
 			return (i);
 		}
@@ -121,11 +121,11 @@ void	*philo_status(void *info)
 
 // 	if (philo->life == 1)
 // 	{
-// 		check = (int)(get_timestamp() - philo->check_time);
+// 		check = (int)(philo->check_time - philo->prev_time);
 // 		if (check > philo->t_to_die)
 // 		{
 // 			philo->life = 0;
-// 			philo->death_time = get_timestamp();
+// 			philo->death_time = philo->check_time;
 // 		}
 // 	}
 // }
