@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/19 16:35:21 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/22 19:36:19 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ static void	check_everyone_ate(t_data *data)
 			if (data->thinker[i].nb_eat == data->nb_times_eat
 				&& data->nb_times_eat > 0)
 			{
-				// data->thinker[i].hungry = 0;
 				check++;
 			}
-			// if (data->thinker[i].hungry == 0)
-			// 	check++;
 			if (check == data->nb_philo)
 			{
 				data->everyone_ate = 1;
@@ -63,6 +60,7 @@ static void	check_everyone_ate(t_data *data)
 // 		if (data->thinker[i].life == 0 && data->thinker[i].death_time > 0)
 // 		{
 // 			data->end = 1;
+// 			waiters_reset_lives(data);
 // 			return (i);
 // 		}
 // 		i++;
@@ -82,7 +80,7 @@ static int	check_lives(t_data *data)
 		if (check > data->time_to_die)
 		{
 			data->thinker[i].life = 0;
-			data->thinker[i].death_time = data->thinker[i].check_time;
+			data->thinker[i].death_time = data->thinker[i].check_time; // get_timestamp();
 			data->end = 1;
 			return (i);
 		}

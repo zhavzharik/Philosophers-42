@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:08:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/17 21:12:37 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/22 19:47:39 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,43 @@ void	monitor(pthread_t *waiter, t_data *data)
 			&philo_status, (void *)data) != 0)
 		put_error_message(data, 4);
 }
+
+// void	monitor(pthread_t **waiter, t_data *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < data->nb_philo)
+// 	{
+// 		if (pthread_create(*waiter[i], NULL,
+// 				&philo_status, (void *)data) != 0)
+// 			put_error_message(data, 4);
+// 		i++;
+// 	}
+// }
+
+// void	monitor_join(pthread_t **waiter, t_data *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < data->nb_philo)
+// 	{
+// 		if (pthread_join(*waiter[i], NULL) != 0)
+// 			put_error_message(data, 5);
+// 		i++;
+// 	}
+// }
+
+// void	join_philo_threads(t_data *data)
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	while (i < data->nb_philo)
+// 	{
+// 		if (pthread_join((data->thinker[i]).philo_thread, NULL) != 0)
+// 			put_error_message(data, 5);
+// 		i++;
+// 	}
+// }

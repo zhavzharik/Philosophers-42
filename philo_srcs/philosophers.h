@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/19 16:35:14 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/22 19:48:11 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void		*philo_status(void *info);
 void		*program_print(t_data *data, int message, int i);
 // void		check_philo_life(t_philo *philo);
 void		check_time(t_philo *philo, int flag);
+// void		join_philo_threads(t_data *data);
 
 #endif
