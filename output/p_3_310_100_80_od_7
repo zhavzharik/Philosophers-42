@@ -1,0 +1,24 @@
+0 1 has taken a fork
+1 1 has taken a fork
+1 1 is eating
+1 2 has taken a fork
+101 1 is sleeping
+101 2 has taken a fork
+101 2 is eating
+101 3 has taken a fork
+181 1 is thinking
+201 2 is sleeping
+201 3 has taken a fork
+201 3 is eating
+281 2 is thinking
+301 3 is sleeping
+301 2 has taken a fork
+301 2 has taken a fork
+301 2 is eating
+301 1 has taken a fork
+381 3 is thinking
+401 2 is sleeping
+401 1 has taken a fork
+401 1 is eating
+401 1 died.
+The simulation stops!
