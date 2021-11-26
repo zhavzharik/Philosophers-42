@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_philo.c                                   :+:      :+:    :+:   */
+/*   ft_check_philo_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 18:22:01 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:46:43 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 static void	waiters_reset_lives(t_data *data)
 {

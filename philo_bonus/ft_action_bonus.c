@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_action.c                                        :+:      :+:    :+:   */
+/*   ft_action_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 23:16:05 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 18:36:57 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:46:27 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 static void	philo_sleep(t_philo *philo)
 {

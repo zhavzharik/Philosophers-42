@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mutex.c                                         :+:      :+:    :+:   */
+/*   ft_sem_open_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 23:14:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 19:27:22 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/26 21:28:03 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
-static	int	ft_define_philo_mutex(t_data *data)
+static	int	ft_define_philo_semaphore(t_data *data)
 {
 	int	i;
 
@@ -27,18 +27,20 @@ static	int	ft_define_philo_mutex(t_data *data)
 	return (0);
 }
 
-int	ft_mutex_init(t_data *data)
+int	ft_semaphore_init(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0)
-			return (put_error_message(data, 6));
+		data->forks[i] = sem_open("/semaphor", O_CREAT, 0666, 1);
+		if (data->forks[i] == SEM_FAILED)
+			exit(EXIT_FAILURE);
 		i++;
 	}
-	if (pthread_mutex_init(&data->put_message, NULL) != 0)
-		return (put_error_message(data, 6));
-	return (ft_define_philo_mutex(data));
+	data->put_message = sem_open("/message", O_CREAT, 0666, 1);
+	if (data->put_message == SEM_FAILED)
+		exit(EXIT_FAILURE);
+	return (ft_define_philo_semaphore(data));
 }

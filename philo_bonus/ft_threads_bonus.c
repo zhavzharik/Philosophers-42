@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_threads.c                                       :+:      :+:    :+:   */
+/*   ft_threads_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:08:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 18:33:09 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:47:16 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 void	start_philo_threads(t_data *data)
 {

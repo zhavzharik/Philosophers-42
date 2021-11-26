@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puterror.c                                      :+:      :+:    :+:   */
+/*   ft_puterror_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 18:29:14 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:35:16 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 static void	ft_philo_clear(t_data *data)
 {
@@ -33,13 +33,13 @@ void	ft_all_clear(t_data *data)
 		{
 			while (i < data->nb_philo)
 			{
-				pthread_mutex_destroy(&(data->forks[i]));
+				sem_unlink(&(data->forks[i]));
 				i++;
 			}
 			free(data->forks);
 			data->forks = NULL;
 		}
-		pthread_mutex_destroy(&data->put_message);
+		sem_unlink(&data->put_message);
 	}
 }
 

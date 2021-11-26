@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philosophers_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 18:21:02 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/26 21:27:23 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILOSOPHERS_BONUS_H
+# define PHILOSOPHERS_BONUS_H
 
 # include <stdlib.h>
 # include <pthread.h>
@@ -19,10 +19,12 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <string.h>
+# include <semaphore.h>
 
 typedef struct s_philo
 {
 	int				pos;
+	int				pid;
 	int				t_to_die;
 	int				t_to_eat;
 	int				t_to_sleep;
@@ -34,9 +36,9 @@ typedef struct s_philo
 	int				life;
 	int				odd;
 	int				last_odd;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*message;
+	sem_t			*l_fork;
+	sem_t			*r_fork;
+	sem_t			*message;
 	pthread_t		philo_thread;
 }					t_philo;
 
@@ -50,8 +52,8 @@ typedef struct s_data
 	int				everyone_ate;
 	int				end;
 	long long		start_time;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	put_message;
+	sem_t			*forks;
+	sem_t			put_message;
 	t_philo			*thinker;
 }					t_data;
 
@@ -65,7 +67,7 @@ void		detach_philo_threads(t_data *data);
 void		philo_eat(t_philo *philo);
 void		*philo_routine(void *philosopher);
 void		ft_all_clear(t_data *data);
-int			ft_mutex_init(t_data *data);
+int			ft_semaphore_init(t_data *data);
 int			action(t_data *data, char **argv);
 void		philo_print(t_philo *philo, int message);
 void		monitor(pthread_t *waiter, t_data *data);

@@ -6,11 +6,11 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 10:18:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/04 00:12:14 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:46:31 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher_bonus.h"
+#include "philosophers_bonus.h"
 
 static int	ft_minus(char temp)
 {
@@ -23,13 +23,10 @@ static int	ft_minus(char temp)
 	return (minus);
 }
 
-static long long	ft_convert(char temp, long long result, int minus)
+static long long	ft_convert(char temp, long long result)
 {
 	if (temp >= 48 && temp <= 57)
 		result = result * 10 + (temp - 48);
-	//if ((result - 1 > INT_MAX && minus == -1)
-	//	|| (result > INT_MAX && minus == 1))
-	//	ft_puterror();
 	return (result);
 }
 
@@ -53,7 +50,7 @@ int	ft_atoi(const char *str)
 	{
 		while (str[i] >= 48 && str[i] <= 57)
 		{
-			res = ft_convert(str[i], res, minus);
+			res = ft_convert(str[i], res);
 			i++;
 		}
 	}
