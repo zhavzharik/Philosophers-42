@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 19:36:41 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/29 22:04:40 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ int	put_input(t_data *data, char **argv)
 	else
 		data->nb_times_eat = -1;
 	data->everyone_ate = 0;
-	data->end = 0;
+	// data->end = 0;
 	return (init_thinkers(data));
 }

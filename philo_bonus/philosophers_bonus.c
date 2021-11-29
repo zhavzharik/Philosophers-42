@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 00:03:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 18:46:14 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/29 21:03:01 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_data		data;
-	pthread_t	waiter;
+	int			id;
 
 	memset(&data, 0, sizeof(t_data));
 	if (argc != 5 && argc != 6)
@@ -28,11 +28,8 @@ int	main(int argc, char **argv)
 		printf("The philosopher not eat and die!\n");
 	else
 	{
-		action(&data, argv);
-		detach_philo_threads(&data);
-		monitor(&waiter, &data);
-		if (pthread_join(waiter, NULL) != 0)
-			return (put_error_message(&data, 5));
+		id = fork();
+		action(&data, argv, id);
 		ft_all_clear(&data);
 	}
 	return (0);

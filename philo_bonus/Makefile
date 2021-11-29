@@ -6,7 +6,7 @@
 #    By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 22:52:44 by abridger          #+#    #+#              #
-#    Updated: 2021/11/26 21:19:30 by abridger         ###   ########.fr        #
+#    Updated: 2021/11/29 18:58:56 by abridger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS_B			=	philosophers_bonus.c		\
 					ft_init_data_bonus.c		\
 					ft_strlen_bonus.c			\
 					ft_time_bonus.c				\
-					ft_threads_bonus.c			\
+					ft_process_bonus.c			\
 					ft_action_bonus.c			\
 					ft_sem_open_bonus.c			\
 					ft_philo_print_bonus.c		\

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 21:27:23 by abridger         ###   ########.fr       */
+/*   Updated: 2021/11/29 22:12:34 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	sem_t			*r_fork;
 	sem_t			*message;
 	pthread_t		philo_thread;
+	pthread_t		waiter;
 }					t_philo;
 
 typedef struct s_data
@@ -50,7 +51,7 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				nb_times_eat;
 	int				everyone_ate;
-	int				end;
+	// int				end;
 	long long		start_time;
 	sem_t			*forks;
 	sem_t			put_message;
@@ -62,17 +63,16 @@ int			ft_strlen(char *str);
 int			put_error_message(t_data *data, int check);
 int			put_input(t_data *data, char **argv);
 long long	get_timestamp(void);
-void		start_philo_threads(t_data *data);
-void		detach_philo_threads(t_data *data);
+void		philo_process(t_data *data);
+void		wait_waiter(t_data *data, int i);
 void		philo_eat(t_philo *philo);
 void		*philo_routine(void *philosopher);
 void		ft_all_clear(t_data *data);
 int			ft_semaphore_init(t_data *data);
-int			action(t_data *data, char **argv);
+int			action(t_data *data, char **argv, int id);
 void		philo_print(t_philo *philo, int message);
-void		monitor(pthread_t *waiter, t_data *data);
-void		*philo_status(void *info);
-void		*program_print(t_data *data, int message, int i);
+void		*philo_status(void *philosopher);
+void		*program_print(t_data *data, int message);
 void		check_time(t_philo *philo, int flag);
 
 #endif
