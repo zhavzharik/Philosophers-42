@@ -6,53 +6,29 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:08:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/29 21:38:27 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:55:43 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-static void	detach_philo_thread(t_data *data, int i)
-{
-	if (pthread_detach(data->thinker[i].philo_thread) != 0)
-		put_error_message(data, 7);
-}
-
-static void	monitor(t_data *data, int i)
-{
-	if (pthread_create((&(data->thinker[i]).waiter), NULL,
-			&philo_status, &(data->thinker[i])) != 0)
-		put_error_message(data, 4);
-}
-
-static void	start_philo_thread(t_data *data, int i)
-{
-	if (pthread_create((&(data->thinker[i]).philo_thread),
-			NULL, &philo_routine, &(data->thinker[i])) != 0)
-		put_error_message(data, 4);
-}
-
-static void	even_philo_process(t_data *data)
+static void	wait_philo_process(t_data *data)
 {
 	int		i;
+	int		status;
 
-	i = 1;
+	i = 0;
 	while (i < data->nb_philo)
 	{
-		data->thinker[i].pid = fork();
-		if (data->thinker[i].pid == -1)
-			exit (EXIT_FAILURE);
-		if (data->thinker[i].pid != 0)
+		waitpid(-1, &status, 0);
+		if (status != 0)
 		{
-			start_philo_thread(data, i);
-			detach_philo_thread(data, i);
+			i = -1;
+			while(++i < data->nb_philo)
+			{
+				kill(data->thinker[i].pid, 15);
+			}
 		}
-		else
-		{
-			monitor(data, i);
-			wait_waiter(data, i);
-		}
-		i += 2;
 	}
 }
 
@@ -66,18 +42,22 @@ void	philo_process(t_data *data)
 		data->thinker[i].pid = fork();
 		if (data->thinker[i].pid == -1)
 			exit (EXIT_FAILURE);
-		if (data->thinker[i].pid != 0)
+		else if (data->thinker[i].pid == 0)
 		{
-			start_philo_thread(data, i);
-			detach_philo_thread(data, i);
+			philo_routine(&(data->thinker[i]));
 		}
-		else
-		{
-			monitor(data, i);
-			wait_waiter(data, i);
-		}
-		i += 2;
 	}
-	usleep(data->time_to_eat);
-	even_philo_process(data);
+	wait_philo_process(data);
+}
+
+void	monitor_create(t_data *data)
+{
+	if (pthread_create(&(data->waiter), NULL, &philo_status, (void *)data) != 0)
+		put_error_message(data, 4);
+}
+
+void	monitor_join(t_data *data)
+{
+	if (pthread_join(data->waiter, NULL) != 0)
+		put_error_message(data, 5);
 }

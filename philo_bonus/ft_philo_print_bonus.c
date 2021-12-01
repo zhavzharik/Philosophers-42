@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:59:57 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/29 22:12:17 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:42:13 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	philo_print(t_philo *philo, int message)
 	long long	timing;
 
 	timing = philo->check_time - philo->start_time;
-	sem_wait(philo->message);
+	sem_wait(philo->data->put_message);
 	if (message == 1 && philo->life == 1)
 		printf("%lli %d has taken a fork\n",
 			get_time(philo, 1), philo->pos);
@@ -42,24 +42,23 @@ void	philo_print(t_philo *philo, int message)
 	else if (message == 5 && philo->life == 1)
 		printf("%lli %d died.\nThe simulation stops!\n",
 			get_time(philo, 2), philo->pos);
-	sem_post(philo->message);
+	sem_post(philo->data->put_message);
 }
 
-void	*program_print(t_data *data, int message)
+void	*program_print(t_data *data, int message, int i)
 {
-
-	sem_wait(&data->put_message);
-	// if (message == 5)
-	// {
-	// 	printf("%lli %d died.\nThe simulation stops!\n",
-	// 		get_time(&(data->thinker[i]), 2), data->thinker[i].pos);
-	// }
+	sem_wait(data->put_message);
+	if (message == 5)
+	{
+		printf("%lli %d died.\nThe simulation stops!\n",
+			get_time(&(data->thinker[i]), 2), data->thinker[i].pos);
+	}
 	if (message == 6)
 	{
 		printf("All the philosopher has eaten at least %d times each!\n",
 			data->nb_times_eat);
 		printf("The simulation stops!\n");
 	}
-	sem_post(&data->put_message);
+	sem_post(data->put_message);
 	return (NULL);
 }

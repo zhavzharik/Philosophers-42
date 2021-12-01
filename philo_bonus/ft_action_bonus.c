@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 23:16:05 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/29 22:11:01 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:56:23 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ static void	philo_think(t_philo *philo)
 	// 	usleep(1000);
 }
 
-void	*philo_routine(void *philosopher)
+void	philo_routine(t_philo *philo)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)philosopher;
+	if (philo->pos % 2 == 0)
+		usleep(philo->t_to_eat);
 	while (philo->life == 1)
 	{
 		philo_eat(philo);
@@ -37,17 +36,14 @@ void	*philo_routine(void *philosopher)
 		philo_think(philo);
 		usleep(999);
 	}
-	return (NULL);
 }
 
-int	action(t_data *data, char **argv, int id) // add var end and meal?
+int	action(t_data *data, char **argv)
 {
-	if (id != 0)
-	{
-		put_input(data, argv);
-		ft_semaphore_init(data);
-	}
-	if (id == 0)
-		philo_process(data);
+	put_input(data, argv);
+	ft_semaphore_init(data);
+	monitor_create(data);
+	philo_process(data);
+	monitor_join(data);
 	return (0);
 }

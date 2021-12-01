@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/29 21:34:10 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:48:25 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ void	ft_all_clear(t_data *data)
 	if (data)
 	{
 		ft_philo_clear(data);
-		if (data->forks)
-		{
-			sem_unlink("/semaphors");
-			free(data->forks);
-			data->forks = NULL;
-		}
+		sem_close(data->forks);
+		sem_close(data->put_message);
+		sem_close(data->times_meal);
+		// sem_close(data->end);
+		sem_unlink("/forks");
 		sem_unlink("/message");
+		sem_unlink("/meal");
+		// sem_unlink("/end");
 	}
 }
 
@@ -61,8 +62,8 @@ int	put_error_message(t_data *data, int check)
 		return (put_err_str("Failed to join thread!"));
 	// else if (check == 6)
 	// 	return (put_err_str("Failed to init mutex!"));
-	else if (check == 7)
-		return (put_err_str("Failed to detach thread!"));
+	// else if (check == 7)
+	// 	return (put_err_str("Failed to detach thread!"));
 	ft_all_clear(data);
 	return (1);
 }

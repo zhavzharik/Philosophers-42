@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/29 22:04:40 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:33:55 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	ft_malloc_philo(t_data *data)
 	data->thinker = (t_philo *)malloc(sizeof(t_philo) * i);
 	if (!data->thinker)
 		return (put_error_message(data, 3));
-	data->forks = (sem_t *)malloc(sizeof(sem_t) * i);
-	if (!data->forks)
-		return (put_error_message(data, 3));
+	// data->forks = (sem_t *)malloc(sizeof(sem_t) * i);
+	// if (!data->forks)
+	// 	return (put_error_message(data, 3));
 	return (0);
 }
 
@@ -57,6 +57,7 @@ static int	init_thinkers(t_data *data)
 			data->thinker[i].odd = 1;
 		else
 			data->thinker[i].odd = 0;
+		data->thinker[i].data = data;
 		last_philo(data, i);
 	}
 	return (0);
@@ -72,7 +73,7 @@ int	put_input(t_data *data, char **argv)
 		data->nb_times_eat = ft_atoi(argv[5]);
 	else
 		data->nb_times_eat = -1;
+	data->end = 0;
 	data->everyone_ate = 0;
-	// data->end = 0;
 	return (init_thinkers(data));
 }

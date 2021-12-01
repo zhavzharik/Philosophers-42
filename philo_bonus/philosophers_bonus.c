@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 00:03:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/29 21:03:01 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:47:37 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	t_data		data;
-	int			id;
 
 	memset(&data, 0, sizeof(t_data));
 	if (argc != 5 && argc != 6)
@@ -25,11 +24,10 @@ int	main(int argc, char **argv)
 		|| (argc == 6 && ft_atoi(argv[5]) < 0))
 		return (put_error_message(&data, 2));
 	else if (ft_atoi(argv[1]) == 1)
-		printf("The philosopher not eat and die!\n");
+		printf("The philosopher not eat and die!\n"); // rewrite
 	else
 	{
-		id = fork();
-		action(&data, argv, id);
+		action(&data, argv);
 		ft_all_clear(&data);
 	}
 	return (0);
