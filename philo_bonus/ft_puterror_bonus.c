@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/01 21:48:25 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:46:03 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	put_error_message(t_data *data, int check)
 		return (put_err_str("Failed to join thread!"));
 	// else if (check == 6)
 	// 	return (put_err_str("Failed to init mutex!"));
-	// else if (check == 7)
-	// 	return (put_err_str("Failed to detach thread!"));
+	else if (check == 7)
+		return (put_err_str("Failed to detach thread!"));
 	ft_all_clear(data);
 	return (1);
 }

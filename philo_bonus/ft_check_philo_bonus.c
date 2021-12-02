@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/01 21:57:37 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:10:46 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	check_lives(t_data *data)
 	while (i < data->nb_philo)
 	{
 		check = (int)(data->thinker[i].check_time - data->thinker[i].prev_time);
+		// printf("Check = %d\t philo = %d\t", check, data->thinker[i].pos); // delete
 		if (check == 0)
 			check = get_timestamp() - data->thinker[i].prev_time;
 		if (check > data->time_to_die)
@@ -63,6 +64,7 @@ static int	check_lives(t_data *data)
 			return (i);
 		}
 		i++;
+		// printf("End = %d\n", data->end); // delete
 	}
 	return (0);
 }

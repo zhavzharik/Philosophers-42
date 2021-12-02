@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 23:16:05 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/01 21:56:23 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:14:10 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	action(t_data *data, char **argv)
 	put_input(data, argv);
 	ft_semaphore_init(data);
 	monitor_create(data);
+	// monitor_detach(data);
 	philo_process(data);
 	monitor_join(data);
 	return (0);
