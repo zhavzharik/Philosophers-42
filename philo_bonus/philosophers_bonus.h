@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/02 20:14:25 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/02 22:39:46 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_data
 	sem_t			*forks;
 	sem_t			*put_message;
 	sem_t			*times_meal;
-	// sem_t			*end;
+	sem_t			*game_end;
 	t_philo			*thinker;
 	int				end;
 	int				everyone_ate;
@@ -70,7 +70,7 @@ long long	get_timestamp(void);
 void		philo_process(t_data *data);
 void		philo_routine(t_philo *philo);
 void		monitor_create(t_data *data);
-void		monitor_join(t_data *data);
+// void		monitor_join(t_data *data);
 void		philo_eat(t_philo *philo);
 void		ft_all_clear(t_data *data);
 int			ft_semaphore_init(t_data *data);
@@ -79,6 +79,7 @@ void		philo_print(t_philo *philo, int message);
 void		*philo_status(void *info);
 void		*program_print(t_data *data, int message, int i);
 void		check_time(t_philo *philo, int flag);
-// void		monitor_detach(t_data *data);
+void		*game_end(void *info);
+void		monitor_detach(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/02 17:46:03 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/02 22:21:46 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	ft_all_clear(t_data *data)
 		sem_close(data->forks);
 		sem_close(data->put_message);
 		sem_close(data->times_meal);
-		// sem_close(data->end);
+		sem_close(data->game_end);
 		sem_unlink("/forks");
 		sem_unlink("/message");
 		sem_unlink("/meal");
-		// sem_unlink("/end");
+		sem_unlink("/end");
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:08:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/02 20:14:20 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/02 22:39:29 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ static void	wait_philo_process(t_data *data)
 		}
 		i++;
 	}
+	if (data->end == 1)
+		exit(0);
 }
 
 void	philo_process(t_data *data)
 {
-	int		i;
+	int			i;
+	pthread_t	checker;
 
 	i = 0;
 	while (i < data->nb_philo)
@@ -45,7 +48,14 @@ void	philo_process(t_data *data)
 			exit (EXIT_FAILURE);
 		else if (data->thinker[i].pid == 0)
 		{
+			if (pthread_create(&(checker), NULL,
+					&philo_status, &(data->thinker[i])) != 0)
+				put_error_message(data, 4);
+			if (pthread_detach(checker) != 0)
+				put_error_message(data, 7);
 			philo_routine(&(data->thinker[i]));
+			// if (pthread_join(checker, NULL) != 0)
+			// 	put_error_message(data, 5);
 		}
 		i++;
 	}
@@ -54,18 +64,18 @@ void	philo_process(t_data *data)
 
 void	monitor_create(t_data *data)
 {
-	if (pthread_create(&(data->waiter), NULL, &philo_status, (void *)data) != 0)
+	if (pthread_create(&(data->waiter), NULL, &game_end, (void *)data) != 0)
 		put_error_message(data, 4);
 }
 
-void	monitor_join(t_data *data)
-{
-	if (pthread_join(data->waiter, NULL) != 0)
-		put_error_message(data, 5);
-}
-
-// void	monitor_detach(t_data *data)
+// void	monitor_join(t_data *data)
 // {
-// 	if (pthread_detach(data->waiter) != 0)
-// 		put_error_message(data, 7);
+// 	if (pthread_join(data->waiter, NULL) != 0)
+// 		put_error_message(data, 5);
 // }
+
+void	monitor_detach(t_data *data)
+{
+	if (pthread_detach(data->waiter) != 0)
+		put_error_message(data, 7);
+}

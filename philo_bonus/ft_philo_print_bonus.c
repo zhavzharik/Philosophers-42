@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:59:57 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/01 21:42:13 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/02 22:24:50 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,23 @@ void	philo_print(t_philo *philo, int message)
 		printf("%lli %d is thinking\n",
 			timing + philo->t_to_eat + philo->t_to_sleep, philo->pos);
 	else if (message == 5 && philo->life == 1)
+	{
 		printf("%lli %d died.\nThe simulation stops!\n",
 			get_time(philo, 2), philo->pos);
+		sem_post(philo->data->game_end);
+	}
 	sem_post(philo->data->put_message);
 }
 
 void	*program_print(t_data *data, int message, int i)
 {
+	(void)i;
 	sem_wait(data->put_message);
-	if (message == 5)
-	{
-		printf("%lli %d died.\nThe simulation stops!\n",
-			get_time(&(data->thinker[i]), 2), data->thinker[i].pos);
-	}
+	// if (message == 5)
+	// {
+	// 	printf("%lli %d died.\nThe simulation stops!\n",
+	// 		get_time(&(data->thinker[i]), 2), data->thinker[i].pos);
+	// }
 	if (message == 6)
 	{
 		printf("All the philosopher has eaten at least %d times each!\n",

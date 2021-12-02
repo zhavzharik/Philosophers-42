@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 23:16:05 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/02 20:14:10 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/02 22:40:07 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	philo_think(t_philo *philo)
 
 void	philo_routine(t_philo *philo)
 {
-	if (philo->pos % 2 == 0)
-		usleep(philo->t_to_eat);
-	while (philo->life == 1)
+	// if (philo->pos % 2 == 0)
+	// 	usleep(philo->t_to_eat);
+	while (philo->life == 1 && philo->data->end == 0)
 	{
 		philo_eat(philo);
 		philo_sleep(philo);
@@ -43,8 +43,8 @@ int	action(t_data *data, char **argv)
 	put_input(data, argv);
 	ft_semaphore_init(data);
 	monitor_create(data);
-	// monitor_detach(data);
+	monitor_detach(data);
 	philo_process(data);
-	monitor_join(data);
+	// monitor_join(data);
 	return (0);
 }
