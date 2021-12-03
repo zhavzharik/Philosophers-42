@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/01 21:33:55 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/03 17:18:22 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,10 @@
 
 static int	ft_malloc_philo(t_data *data)
 {
-	int		i;
-
-	i = data->nb_philo;
-	data->thinker = (t_philo *)malloc(sizeof(t_philo) * i);
+	data->thinker = (t_philo *)malloc(sizeof(t_philo) * data->nb_philo);
 	if (!data->thinker)
 		return (put_error_message(data, 3));
-	// data->forks = (sem_t *)malloc(sizeof(sem_t) * i);
-	// if (!data->forks)
-	// 	return (put_error_message(data, 3));
 	return (0);
-}
-
-static void	last_philo(t_data *data, int i)
-{
-	if (data->nb_philo % 2 == 1 && i == data->nb_philo - 1)
-		data->thinker[i].last_odd = 1;
-	else
-		data->thinker[i].last_odd = 0;
 }
 
 static int	init_thinkers(t_data *data)
@@ -53,12 +39,7 @@ static int	init_thinkers(t_data *data)
 		data->thinker[i].start_time = data->start_time;
 		data->thinker[i].death_time = 0;
 		data->thinker[i].life = 1;
-		if (data->nb_philo % 2 == 1)
-			data->thinker[i].odd = 1;
-		else
-			data->thinker[i].odd = 0;
 		data->thinker[i].data = data;
-		last_philo(data, i);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/02 22:21:46 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/03 17:45:40 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,24 @@
 
 static void	ft_philo_clear(t_data *data)
 {
+	int	i;
+	// int	status;
+
+	i = 0;
 	if (data->thinker)
 	{
+		while (i < data->nb_philo)
+		{
+			kill(data->thinker[i].pid, SIGKILL);
+			// waitpid(-1, &status, 0);
+			// if (status != 0)
+			// {
+			// 	kill(data->thinker[i].pid, SIGKILL);
+			// 	sem_post(data->sem_end);
+			// }
+			i++;
+		}
+		sem_post(data->sem_end);
 		free(data->thinker);
 		data->thinker = NULL;
 	}
@@ -23,21 +39,20 @@ static void	ft_philo_clear(t_data *data)
 
 void	ft_all_clear(t_data *data)
 {
-	int	i;
-
-	i = 0;
 	if (data)
 	{
 		ft_philo_clear(data);
 		sem_close(data->forks);
 		sem_close(data->put_message);
-		sem_close(data->times_meal);
-		sem_close(data->game_end);
+		sem_close(data->sem_meal);
+		sem_close(data->sem_end);
 		sem_unlink("/forks");
 		sem_unlink("/message");
 		sem_unlink("/meal");
 		sem_unlink("/end");
 	}
+	// if (data->end == 1)
+	// 	exit(0);
 }
 
 static int	put_err_str(char *str)
@@ -60,8 +75,6 @@ int	put_error_message(t_data *data, int check)
 		return (put_err_str("Failed to create thread!"));
 	else if (check == 5)
 		return (put_err_str("Failed to join thread!"));
-	// else if (check == 6)
-	// 	return (put_err_str("Failed to init mutex!"));
 	else if (check == 7)
 		return (put_err_str("Failed to detach thread!"));
 	ft_all_clear(data);
