@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/03 17:45:40 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/06 22:00:13 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,14 @@
 static void	ft_philo_clear(t_data *data)
 {
 	int	i;
-	// int	status;
+	int	status;
 
 	i = 0;
 	if (data->thinker)
 	{
 		while (i < data->nb_philo)
 		{
-			kill(data->thinker[i].pid, SIGKILL);
-			// waitpid(-1, &status, 0);
-			// if (status != 0)
-			// {
-			// 	kill(data->thinker[i].pid, SIGKILL);
-			// 	sem_post(data->sem_end);
-			// }
+			waitpid(-1, &status, 0);
 			i++;
 		}
 		sem_post(data->sem_end);
@@ -73,8 +67,8 @@ int	put_error_message(t_data *data, int check)
 		return (put_err_str("Malloc error!"));
 	else if (check == 4)
 		return (put_err_str("Failed to create thread!"));
-	else if (check == 5)
-		return (put_err_str("Failed to join thread!"));
+	// else if (check == 5)
+	// 	return (put_err_str("Failed to join thread!"));
 	else if (check == 7)
 		return (put_err_str("Failed to detach thread!"));
 	ft_all_clear(data);
