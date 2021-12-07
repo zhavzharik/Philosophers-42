@@ -6,7 +6,7 @@
 #    By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 22:52:44 by abridger          #+#    #+#              #
-#    Updated: 2021/11/29 18:58:56 by abridger         ###   ########.fr        #
+#    Updated: 2021/12/07 21:22:28 by abridger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,10 @@ CFLAGS			=	-Wall -Wextra -Werror
 
 PTFLAG			=	-pthread
 
-RM				=	rm -rf
-
-bonus:	$(NAME_B)
+RM				=	rm -f
 
 %.o: %.c $(HEADER_B) Makefile
-	$(CC) $(CFLAGS) $(PTFLAG) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME_B): $(OBJS_B)
 	$(CC) $(CFLAGS) $(PTFLAG) $(OBJS_B) -o $@
@@ -51,6 +49,6 @@ clean:
 fclean: clean
 		$(RM) $(NAME_B)
 
-re:	fclean bonus
+re:	fclean
 
-.PHONY:	clean fclean re bonus
+.PHONY:	clean fclean re

@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:04:42 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/25 20:48:10 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/07 20:05:54 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,16 @@
 
 static void	philo_take_forks(t_philo *philo)
 {
-	if (philo->pos % 2 == 1 && philo->last_odd != 1) // if use strategy left-handed and right-handed philo
-	{
-		pthread_mutex_lock(philo->r_fork);
-		philo_print(philo, 1);
-		pthread_mutex_lock(philo->l_fork);
-		philo_print(philo, 1);
-	}
-	else if (philo->pos % 2 == 0 || philo->last_odd == 1)
-	{
-		pthread_mutex_lock(philo->r_fork);
-		philo_print(philo, 1);
-		pthread_mutex_lock(philo->l_fork);
-		philo_print(philo, 1);
-	}
+	pthread_mutex_lock(philo->r_fork);
+	philo_print(philo, 1);
+	pthread_mutex_lock(philo->l_fork);
+	philo_print(philo, 1);
 }
 
 static void	philo_put_forks(t_philo *philo)
 {
-	if (philo->pos % 2 == 1 && philo->last_odd != 1)
-	{
-		pthread_mutex_unlock(philo->r_fork);
-		pthread_mutex_unlock(philo->l_fork);
-	}
-	else if (philo->pos % 2 == 0 || philo->last_odd == 1)
-	{
-		pthread_mutex_unlock(philo->l_fork);
-		pthread_mutex_unlock(philo->r_fork);
-	}
+	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_unlock(philo->l_fork);
 }
 
 void	philo_eat(t_philo *philo)

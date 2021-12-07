@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/06 21:59:29 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/07 21:51:34 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ int			ft_semaphore_init(t_data *data);
 int			action(t_data *data, char **argv);
 void		philo_print(t_philo *philo, int message);
 void		*philo_status(void *info);
-void		program_print(t_data *data, int message, int i);
+void		program_print(t_data *data);
 void		check_time(t_philo *philo, int flag);
 void		*game_end(void *info);
 void		*check_everyone_ate(void *info);
+void		*ft_kill_process(t_data *data);
 
 #endif

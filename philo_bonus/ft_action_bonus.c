@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 23:16:05 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/06 22:00:04 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:21:35 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	philo_routine(t_philo *philo)
 		philo_eat(philo);
 		philo_sleep(philo);
 		philo_think(philo);
-		usleep(999); // ?
+		usleep(999);
 	}
 }
 

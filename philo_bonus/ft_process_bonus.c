@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:08:30 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/06 22:01:50 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/07 21:37:38 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,20 @@ void	philo_process(t_data *data)
 		i++;
 		usleep(100);
 	}
-	// if (data->end == 0)
-	// 	usleep(999);
 }
 
 void	monitor(pthread_t waiter_end, pthread_t waiter_meal, t_data *data)
 {
 	if (pthread_create(&waiter_end, NULL, &game_end, (void *)data) != 0)
 		put_error_message(data, 4);
-	if (pthread_create(&waiter_meal, NULL,
-			&check_everyone_ate, (void *)data) != 0)
-		put_error_message(data, 4);
 	if (pthread_detach(waiter_end) != 0)
 		put_error_message(data, 7);
-	if (pthread_detach(waiter_meal) != 0)
-		put_error_message(data, 7);
+	if (data->nb_times_eat > 0)
+	{
+		if (pthread_create(&waiter_meal, NULL,
+				&check_everyone_ate, (void *)data) != 0)
+			put_error_message(data, 4);
+		if (pthread_detach(waiter_meal) != 0)
+			put_error_message(data, 7);
+	}
 }

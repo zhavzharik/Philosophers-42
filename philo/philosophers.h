@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 18:21:02 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/07 20:08:11 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <limits.h>
 # include <sys/time.h>
 # include <string.h>
 
@@ -32,8 +33,6 @@ typedef struct s_philo
 	long long		start_time;
 	long long		death_time;
 	int				life;
-	int				odd;
-	int				last_odd;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*message;

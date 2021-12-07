@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/06 21:58:32 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/07 21:53:34 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,15 @@ void	*check_everyone_ate(void *info)
 
 	check = 0;
 	data = (t_data *)info;
-	if (data->nb_times_eat > 0)
+	while (data->end == 0)
 	{
-		while (data->end == 0)
+		sem_wait(data->sem_meal);
+		check++;
+		if (check == data->nb_philo)
 		{
-			sem_wait(data->sem_meal);
-			check++;
-			if (check == data->nb_times_eat)
-			{
-				data->everyone_ate = 1;
-				program_print(data, 6, 1); // 1 not need?
-				data->end = 1;
-				break ;
-			}
+			data->everyone_ate = 1;
+			program_print(data);
+			return (ft_kill_process(data));
 		}
 	}
 	return (NULL);
@@ -53,7 +49,7 @@ void	*philo_status(void *philosopher)
 			philo->death_time = get_timestamp();
 			philo_print(philo, 5);
 			philo->life = 0;
-			philo->data->end = 1;
+			sem_post(philo->data->sem_end);
 		}
 		usleep(100);
 	}
@@ -69,9 +65,5 @@ void	*game_end(void *info)
 	i = -1;
 	sem_wait(data->sem_end);
 	data->end = 1;
-	while (++i < data->nb_philo)
-	{
-		kill(data->thinker[i].pid, SIGKILL);
-	}
-	return (NULL);
+	return (ft_kill_process(data));
 }

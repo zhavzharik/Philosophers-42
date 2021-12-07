@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:37:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/25 19:52:12 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/07 20:20:06 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ static int	ft_malloc_philo(t_data *data)
 	if (!data->forks)
 		return (put_error_message(data, 3));
 	return (0);
-}
-
-static void	last_philo(t_data *data, int i)
-{
-	if (data->nb_philo % 2 == 1 && i == data->nb_philo - 1)
-		data->thinker[i].last_odd = 1;
-	else
-		data->thinker[i].last_odd = 0;
 }
 
 static int	init_thinkers(t_data *data)
@@ -53,11 +45,6 @@ static int	init_thinkers(t_data *data)
 		data->thinker[i].start_time = data->start_time;
 		data->thinker[i].death_time = 0;
 		data->thinker[i].life = 1;
-		if (data->nb_philo % 2 == 1)
-			data->thinker[i].odd = 1;
-		else
-			data->thinker[i].odd = 0;
-		last_philo(data, i);
 	}
 	return (0);
 }
