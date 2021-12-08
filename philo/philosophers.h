@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/07 20:08:11 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:50:44 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <limits.h>
 # include <sys/time.h>
 # include <string.h>
 

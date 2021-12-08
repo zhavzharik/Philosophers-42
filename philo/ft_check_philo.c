@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 18:22:01 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:46:38 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,24 @@ static void	check_everyone_ate(t_data *data)
 {
 	int		i;
 	int		check;
+	int		meal;
 
-	i = 0;
-	check = 0;
-	if (data->nb_times_eat > 0)
+	while (data->nb_times_eat > 0 && data->everyone_ate == 0)
 	{
+		i = 0;
+		check = 0;
 		while (i < data->nb_philo)
 		{
-			if (data->thinker[i].nb_eat == data->nb_times_eat
-				&& data->nb_times_eat > 0)
+			meal = data->thinker[i].nb_eat;
+			if (meal >= data->nb_times_eat)
 			{
 				check++;
 			}
-			if (check == data->nb_philo)
-			{
-				data->everyone_ate = 1;
-			}
 			i++;
+		}
+		if (check == data->nb_philo)
+		{
+			data->everyone_ate = 1;
 		}
 	}
 }
