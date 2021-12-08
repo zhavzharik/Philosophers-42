@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/07 21:53:34 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:06:54 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@ void	*philo_status(void *philosopher)
 void	*game_end(void *info)
 {
 	t_data	*data;
-	int		i;
 
 	data = (t_data *)info;
-	i = -1;
 	sem_wait(data->sem_end);
 	data->end = 1;
 	return (ft_kill_process(data));
