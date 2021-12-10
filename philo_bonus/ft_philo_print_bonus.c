@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:59:57 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/07 18:22:21 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:17:05 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,18 @@ void	philo_print(t_philo *philo, int message)
 
 	timing = philo->check_time - philo->start_time;
 	sem_wait(philo->data->put_message);
-	if (message == 1 && philo->life == 1 && philo->data->end == 0)
+	if (message == 1 && philo->life == 1 && philo->data->end == 0
+		&& philo->data->everyone_ate == 0)
 		printf("%lli %d has taken a fork\n",
 			get_time(philo, 1), philo->pos);
-	else if (message == 2 && philo->life == 1 && philo->data->end == 0)
+	else if (message == 2 && philo->life == 1 && philo->data->end == 0
+		&& philo->data->everyone_ate == 0)
 		printf("%lli %d is eating\n", timing, philo->pos);
-	else if (message == 3 && philo->life == 1 && philo->data->end == 0)
+	else if (message == 3 && philo->life == 1 && philo->data->end == 0
+		&& philo->data->everyone_ate == 0)
 		printf("%lli %d is sleeping\n", timing + philo->t_to_eat, philo->pos);
-	else if (message == 4 && philo->life == 1 && philo->data->end == 0)
+	else if (message == 4 && philo->life == 1 && philo->data->end == 0
+		&& philo->data->everyone_ate == 0)
 		printf("%lli %d is thinking\n",
 			timing + philo->t_to_eat + philo->t_to_sleep, philo->pos);
 	else if (message == 5)
