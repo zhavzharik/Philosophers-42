@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:12:17 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/10 17:17:14 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:37:54 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	*ft_kill_process(t_data *data)
 	{
 		kill(data->thinker[i].pid, SIGKILL);
 	}
+	sem_post(data->put_message);
 	return (NULL);
 }
 

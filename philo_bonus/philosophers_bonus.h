@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 23:30:40 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/07 21:51:34 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:37:09 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ void		check_time(t_philo *philo, int flag);
 void		*game_end(void *info);
 void		*check_everyone_ate(void *info);
 void		*ft_kill_process(t_data *data);
+void		philo_print_death(t_philo *philo);
 
 #endif

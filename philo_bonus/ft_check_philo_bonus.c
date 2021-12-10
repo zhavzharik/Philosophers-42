@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 20:45:01 by abridger          #+#    #+#             */
-/*   Updated: 2021/12/08 19:06:54 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:41:30 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ void	*philo_status(void *philosopher)
 	int		check;
 
 	philo = (t_philo *)philosopher;
-	while (philo->life == 1)
+	while (philo->life == 1 && philo->data->end == 0)
 	{
 		check = (int)(philo->check_time - philo->prev_time);
-		if (check == 0)
+		if (check == 0 && philo->data->end == 0)
 			check = get_timestamp() - philo->prev_time;
-		if (check > philo->t_to_die)
+		if (check > philo->t_to_die && philo->data->end == 0)
 		{
 			philo->death_time = get_timestamp();
-			philo_print(philo, 5);
-			philo->life = 0;
+			philo_print_death(philo);
 			sem_post(philo->data->sem_end);
+			philo->life = 0;
 		}
 		usleep(100);
 	}
@@ -59,9 +59,13 @@ void	*philo_status(void *philosopher)
 void	*game_end(void *info)
 {
 	t_data	*data;
+	int		i;
 
 	data = (t_data *)info;
+	i = -1;
 	sem_wait(data->sem_end);
 	data->end = 1;
+	while (++i < data->nb_philo)
+		data->thinker[i].life = 0;
 	return (ft_kill_process(data));
 }
