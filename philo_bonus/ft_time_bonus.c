@@ -6,7 +6,7 @@
 /*   By: abridger <abridger@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:56:20 by abridger          #+#    #+#             */
-/*   Updated: 2021/11/26 18:47:22 by abridger         ###   ########.fr       */
+/*   Updated: 2021/12/11 19:22:26 by abridger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_time(t_philo *philo, int flag)
 {
 	int	difference;
 
-	while (1)
+	while (philo->data->end == 0)
 	{
 		usleep(50);
 		difference = (int)(get_timestamp() - philo->check_time);
